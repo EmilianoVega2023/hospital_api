@@ -1,0 +1,41 @@
+Hospital Management API
+Sistema de gestión hospitalaria backend desarrollado con FastAPI, enfocado en la administración de turnos, médicos y pacientes con un sistema de autenticación robusto y auditoría integrada.
+
+🚀 Características
+Autenticación Híbrida: Sistema de login único para Pacientes y Personal Administrativo (Secretarios/Admins) utilizando JWT (Access & Refresh Tokens).
+
+Gestión de Turnos: Lógica compleja para verificar disponibilidad médica según días de la semana y rangos horarios.
+
+Control de Acceso (RBAC): Dependencias de seguridad para restringir endpoints según el rol del usuario.
+
+Arquitectura Asíncrona: Implementación completa con SQLAlchemy asíncrono para manejar múltiples peticiones de alta concurrencia.
+
+Auditoría: Registro automático de cambios y acciones sensibles en el sistema.
+
+🛠️ Stack Tecnológico
+Lenguaje: Python 3.10+
+
+Framework: FastAPI
+
+Base de Datos: PostgreSQL
+
+ORM: SQLAlchemy 2.0 (Async)
+
+Validación: Pydantic V2
+
+Seguridad: Passlib (Bcrypt) + Jose (JWT)
+
+📁 Estructura del Proyecto
+Plaintext
+app/
+├── api/          # Endpoints y rutas (v1)
+├── core/         # Configuración, seguridad y constantes
+├── db/           # Sesión de base de datos y modelos base
+├── models/       # Definición de tablas SQL
+└── schemas/      # Modelos de validación Pydantic
+
+
+💡 Consejo de Optimización (El "Wildcard")
+Ya que estás trabajando con una base de datos hospitalaria y te interesa la eficiencia, podrías considerar implementar un sistema de Rate Limiting específicamente en el endpoint de /login y /registro.
+
+Dado que un sistema de salud es un objetivo común para ataques de fuerza bruta, usar algo como slowapi te permitiría proteger estos endpoints sin añadir demasiada complejidad a tu código "puro".

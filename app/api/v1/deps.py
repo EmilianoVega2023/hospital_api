@@ -32,12 +32,14 @@ async def get_current_admin(
     db: AsyncSession = Depends(get_db),
 ) -> UsuarioAdmin:
     payload = decode_token(credentials.credentials)
+    print("PAYLOAD:", payload)  # 👈 ACÁ
     if payload.get("type") != "access" or payload.get("role") not in ["secretario", "admin"]:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Acceso denegado")
     result = await db.execute(
         select(UsuarioAdmin).where(UsuarioAdmin.id == UUID(payload["sub"]), UsuarioAdmin.activo == True)
     )
     admin = result.scalar_one_or_none()
+    print("USER DB:", admin)  # 👈 ACÁ
     if not admin:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Usuario no encontrado")
     return admin

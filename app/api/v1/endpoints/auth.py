@@ -15,7 +15,6 @@ from app.core.security import (
 
 router = APIRouter(prefix="/auth", tags=["Autenticación"])
 
-
 @router.post("/registro", response_model=PacienteResponse, status_code=201)
 async def registrar_paciente(datos: PacienteCreate, db: AsyncSession = Depends(get_db)):
     existente = await db.execute(
